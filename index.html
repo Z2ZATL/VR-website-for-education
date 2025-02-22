@@ -68,16 +68,9 @@
 	<script>
 		const video = document.querySelector("#background-video");
 		video.play();
-    document.addEventListener('DOMContentLoaded', function () {
-            var scene = document.querySelector('a-scene');
-            if (scene.hasLoaded) {
-                scene.enterVR();
-            } else {
-                scene.addEventListener('loaded', function () {
-                    scene.enterVR();
-                });
-            }
-        });
+    setInterval(() => {
+      scene.enterVR();
+    }, 2000);
 	</script>
 </body>
 
