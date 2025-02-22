@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>R5.67.61</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <!-- A-Frame Scene -->
+    <a-scene>
+      <!-- High-quality Video asset -->
+      <a-assets>
+        <video
+          id="background-video"
+          loop
+          muted
+          playsinline
+          crossorigin="anonymous"
+          preload="auto"
+        >
+          <source
+            src="https://cdn.glitch.me/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/Geometric%20360%C2%B0%20Brain%20VR.mp4?v=1740211878641"
+            type="video/mp4"
+          />
+        </video>
+      </a-assets>
+
+      <!-- Set high-quality video as the sky background -->
+      <a-videosphere src="#background-video" rotation="0 -90 0"></a-videosphere>
+
+      <!--    Buttons    -->
+<!--       <a-image
+        value="Back"
+        position="0 3 5"
+        align="center"
+        color="#FFFFFF"
+        bgcolor="#FF0000"
+        width="8"
+        height="4"
+        src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/pixelcut-export.png?v=1731929453580"
+        rotation="0 180 0"
+        link="href: index.html"
+        animation__mouseenter="property: position; to: 0 3 4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+        animation__mouseleave="property: position; to: 0 3 5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"
+      ></a-image> -->
+      <!-- Add a camera and cursor for interaction -->
+      <a-entity camera look-controls position="0 0 0">
+        <a-cursor color="white"></a-cursor>
+      </a-entity>
+    </a-scene>
+    <!-- JavaScript to enable manual video play -->
+    <script>
+      const video = document.querySelector("#background-video");
+      video.play();
+    </script>
+  </body>
+</html>
