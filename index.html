@@ -1,72 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- 
-      This is an HTML comment
-      You can write text in a comment and the content won't be visible in the page
-    -->
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="https://glitch.com/favicon.ico" />
+<head>
+	<meta charset="UTF-8" />
+	<title>R5.67.61</title>
+	<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
 
-    <!--
-      This is the page head - it contains info the browser uses
-      Like the title, which appears on the browser tab but not inside the page
-      Further down you'll see the content that displays in the page
-    -->
-    <title>Hello World!</title>
+<body>
+	<!-- A-Frame Scene -->
+	<a-scene>
+		<!-- Video asset -->
+		<a-assets>
+			<video id="background-video" autoplay loop muted playsinline>
+				<source
+					src="https://cdn.glitch.me/27aea63a-7096-4068-98fa-dfbbd93837ee/background-video.mp4?v=1724817746256"
+					type="video/mp4" />
+			</video>
+		</a-assets>
 
-    <!-- The website stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+		<!-- Set video as the sky background -->
+		<a-videosphere src="#background-video"></a-videosphere>
 
-    <!-- The website JavaScript file -->
-    <script src="/script.js" defer></script>
-  </head>
-  <body>
-    <!--
-      The body includes the content you see in the page
-      Each element is defined using tags, like this <div></div>
-      The attributes like class="wrapper" let us style elements in the CSS
-    -->
-    <div class="wrapper">
-      <div class="content" role="main">
-        <h1 class="title">Hello World!</h1>
-        <img
-          src="https://cdn.glitch.com/a9975ea6-8949-4bab-addb-8a95021dc2da%2Fillustration.svg?v=1618177344016"
-          class="illustration"
-          alt="Editor illustration"
-          title="Click the image!"
-        />
-        <div class="instructions">
-          <h2>Using this project</h2>
-          <p>
-            This is the Glitch <strong>Hello Website</strong> project. You can
-            use it to build your own site. Check out the code in the editor and open
-            the <span class="fileopener" data-file="TODO.md" data-line="0"
-              >TODO</span> for next steps!
-          </p>
-          <!--  🚧 TODO: ADD BUTTON HERE -->
+		<!-- Add the Home text -->
+		<a-text value="Home" position="0 3 -5" align="center" color="#FFFFFF" width="8"></a-text>
 
-          <!-- Once you've added the button from TODO.md, click it in the page -->
-          <!-- Check out the function in script.js to see how it works -->
-        </div>
-      </div>
-    </div>
-    <!-- The footer holds our remix button — you can keep or delete it ✂ -->
-    <footer class="footer">
-      <div class="links"></div>
-      <a
-        class="btn--remix"
-        target="_top"
-        href="https://glitch.com/edit/#!/remix/glitch-hello-website"
-      >
-        <img
-          src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140"
-          alt=""
-        />
-        Remix on Glitch
-      </a>
-    </footer>
-  </body>
+		<a-image position="0 -1.25 -5" depth="0.001" height="1.5" width="2"
+			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/messageImage_1737635382757.jpg?v=1737635406280"
+			link="href: Bateria.html;"
+			animation__mouseenter="property: position; to: 0 -1.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: 0 -1.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
+
+		<a-image position="2 1.75 -5" depth="0.001" height="1.5" width="2"
+			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/hqdefault%20(1).webp?v=1731926437792"
+			link="href: DNA.html;"
+			animation__mouseenter="property: position; to: 2 1.75 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: 2 1.75 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
+
+		<a-image position="2 0.25 -5" depth="0.001" height="1.5" width="2"
+			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/hqdefault%20(2).webp?v=1731927813780"
+			link="href: cellscape.html;"
+			animation__mouseenter="property: position; to: 2 0.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: 2 0.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
+
+		<a-image position="2 -1.25 -5" depth="0.001" height="1.5" width="2"
+			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/hqdefault.jpg?v=1730892256001"
+			link="href: body.html;"
+			animation__mouseenter="property: position; to: 2 -1.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: 2 -1.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
+
+		<a-image position="-2 -1.25 -5" width="2" height="1.5"
+			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/messageImage_1737634842227.jpg?v=1737635032383"
+			link="href: https://cdn.glitch.me/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/R5.67.61%2FVideos%2FIntercellular%20%E2%80%93%20An%20Interbody%20VR%20Experience.mp4?v=1740210078749"
+			animation__mouseenter="property: position; to: -2 -1.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: -2 -1.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
+
+		<a-image position="-1 1 -5" depth="0.001" height="3" width="4"
+			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/pixelcut-export.png?v=1731929453580"></a-image>
+
+		<!-- Add a camera and cursor for interaction -->
+		<a-entity camera look-controls position="0 0 500"
+			animation="property: position; to: 0 0 0; dur: 3000; easing: easeOutQuint;">
+			<a-cursor color="white"></a-cursor>
+		</a-entity>
+	</a-scene>
+
+	<script>
+		const video = document.querySelector("#background-video");
+		video.play();
+	</script>
+</body>
+
 </html>
