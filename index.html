@@ -6,18 +6,49 @@
 	<title>R5.67.61</title>
 	<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 	<script>
-		AFRAME.registerComponent('custom-cursor', {
+		AFRAME.registerComponent('color-change-cursor', {
 			init: function () {
 				var el = this.el;
-				var cursorLoader = el.querySelector('#cursorLoader');
+				var countdownActive = false;
+				var countdownTime = 0;
+				var countdownDuration = 2000; // 2 seconds
 
-				el.addEventListener('mouseenter', function () {
-					cursorLoader.emit('startLoading');
+				function startCountdown() {
+					countdownActive = true;
+					countdownTime = 0;
+				}
+
+				function stopCountdown() {
+					countdownActive = false;
+					el.setAttribute('material', 'color', 'white');
+				}
+
+				this.el.addEventListener('mouseenter', function (evt) {
+					if (evt.detail.intersectedEl.hasAttribute('link')) {
+						startCountdown();
+					}
 				});
 
-				el.addEventListener('mouseleave', function () {
-					cursorLoader.emit('stopLoading');
+				this.el.addEventListener('mouseleave', function () {
+					stopCountdown();
 				});
+
+				this.tick = function (time, deltaTime) {
+					if (countdownActive) {
+						countdownTime += deltaTime;
+						var progress = Math.min(countdownTime / countdownDuration, 1);
+						var color = `rgb(${Math.floor(255 * (1 - progress))}, 255, 0)`;
+						el.setAttribute('material', 'color', color);
+						
+						if (progress >= 1) {
+							var clickedEl = this.el.components.cursor.intersectedEl;
+							if (clickedEl) {
+								clickedEl.emit('click');
+							}
+							stopCountdown();
+						}
+					}
+				};
 			}
 		});
 	</script>
@@ -39,48 +70,45 @@
 
 		<a-image position="0 -1.25 -5" depth="0.001" height="1.5" width="2"
 			src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237143799.jpg?v=1740212343871"
-			link="href: Geo.html;" custom-cursor
+			link="href: Geo.html;"
 			animation__mouseenter="property: position; to: 0 -1.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
 			animation__mouseleave="property: position; to: 0 -1.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
 		<a-image position="2 1.75 -5" depth="0.001" height="1.5" width="2"
 			src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237563591.jpg?v=1740212381331"
-			link="href: DNA.html;" custom-cursor
+			link="href: DNA.html;"
 			animation__mouseenter="property: position; to: 2 1.75 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
 			animation__mouseleave="property: position; to: 2 1.75 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
 		<a-image position="2 0.25 -5" depth="0.001" height="1.5" width="2"
 			src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237230738.jpg?v=1740212417044"
-			link="href: virus.html;" custom-cursor
+			link="href: virus.html;"
 			animation__mouseenter="property: position; to: 2 0.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
 			animation__mouseleave="property: position; to: 2 0.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
 		<a-image position="2 -1.25 -5" depth="0.001" height="1.5" width="2"
 			src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237167478.jpg?v=1740212629685"
-			link="href: body.html;" custom-cursor
+			link="href: body.html;"
 			animation__mouseenter="property: position; to: 2 -1.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
 			animation__mouseleave="property: position; to: 2 -1.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
 		<a-image position="-2 -1.25 -5" width="2" height="1.5"
 			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/messageImage_1737634842227.jpg?v=1737635032383"
-			link="href: intercellular.html" custom-cursor
+			link="href: intercellular.html"
 			animation__mouseenter="property: position; to: -2 -1.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
 			animation__mouseleave="property: position; to: -2 -1.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
 		<a-image position="-1 1 -5" depth="0.001" height="3" width="4"
 			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/pixelcut-export.png?v=1731929453580"></a-image>
 
-		<a-entity camera look-controls position="0 0 500"
-			animation="property: position; to: 0 0 0; dur: 3000; easing: easeOutQuint;">
-			<a-entity cursor="fuse: true; fuseTimeout: 2000"
-					  position="0 0 -1"
-					  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-					  material="color: white; shader: flat">
-				<a-entity id="cursorLoader"
-						  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03; thetaLength: 0"
-						  material="color: #4CAF50; shader: flat"
-						  animation__fusing="property: geometry.thetaLength; startEvents: startLoading; pauseEvents: stopLoading; from: 0; to: 360; dur: 2000; easing: linear"
-						  animation__mouseleave="property: geometry.thetaLength; startEvents: stopLoading; to: 0; dur: 1; easing: linear"></a-entity>
+		<a-entity camera look-controls position="0 1.6 0">
+			<a-entity 
+				cursor="fuse: false;"
+				position="0 0 -0.5"
+				color-change-cursor
+				geometry="primitive: ring; radiusInner: 0.005; radiusOuter: 0.008"
+				material="color: white; shader: flat; opacity: 0.8"
+				raycaster="objects: [link]">
 			</a-entity>
 		</a-entity>
 	</a-scene>
