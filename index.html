@@ -2,67 +2,93 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <title>R5.67.61 - Enhanced UI</title>
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+	<meta charset="UTF-8" />
+	<title>R5.67.61</title>
+	<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+	<script>
+		AFRAME.registerComponent('custom-cursor', {
+			init: function () {
+				var el = this.el;
+				var cursorLoader = el.querySelector('#cursorLoader');
+
+				el.addEventListener('mouseenter', function () {
+					cursorLoader.emit('startLoading');
+				});
+
+				el.addEventListener('mouseleave', function () {
+					cursorLoader.emit('stopLoading');
+				});
+			}
+		});
+	</script>
 </head>
 
 <body>
-  <!-- A-Frame Scene -->
-  <a-scene>
-    <!-- Video asset -->
-    <a-assets>
-      <video id="background-video" autoplay loop muted playsinline>
-        <source
-          src="https://cdn.glitch.me/27aea63a-7096-4068-98fa-dfbbd93837ee/background-video.mp4?v=1724817746256"
-          type="video/mp4" />
-      </video>
-      <!-- Add sound effects -->
-      <audio id="hover-sound" src="https://cdn.example.com/sounds/hover.mp3"></audio>
-      <audio id="click-sound" src="https://cdn.example.com/sounds/click.mp3"></audio>
-    </a-assets>
+	<a-scene>
+		<a-assets>
+			<video id="background-video" autoplay loop muted playsinline>
+				<source
+					src="https://cdn.glitch.me/27aea63a-7096-4068-98fa-dfbbd93837ee/background-video.mp4?v=1724817746256"
+					type="video/mp4" />
+			</video>
+		</a-assets>
 
-    <!-- Set video as the sky background -->
-    <a-videosphere src="#background-video"></a-videosphere>
+		<a-videosphere src="#background-video"></a-videosphere>
 
-    <!-- Add the Home text with glow effect -->
-    <a-text value="Welcome to R5.67.61" position="0 3 -5" align="center" color="#FFD700" width="8"
-      shader="msdf" font="/path-to-font/font.json" negate="false">
-      <a-animation attribute="scale" dur="2000" to="1.2 1.2 1.2" direction="alternate" repeat="indefinite"></a-animation>
-    </a-text>
+		<a-text value="Home" position="0 3 -5" align="center" color="#FFFFFF" width="8"></a-text>
 
-    <!-- Interactive buttons with sound and animations -->
-    <a-image position="-2 1 -5" depth="0.001" height="1.5" width="2"
-      src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237143799.jpg?v=1740212343871"
-      link="href: Geo.html;"
-      event-set__mouseenter="_event: mouseenter; _target: #hover-sound; play: true;"
-      event-set__mouseleave="_event: mouseleave; _target: #hover-sound; stop: true;"
-      animation__mouseenter="property: scale; to: 1.2 1.2 1; dur: 300;"
-      animation__mouseleave="property: scale; to: 1 1 1; dur: 300;"></a-image>
+		<a-image position="0 -1.25 -5" depth="0.001" height="1.5" width="2"
+			src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237143799.jpg?v=1740212343871"
+			link="href: Geo.html;" custom-cursor
+			animation__mouseenter="property: position; to: 0 -1.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: 0 -1.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
-    <a-image position="-2 -1 -5" depth="0.001" height="1.5" width="2"
-      src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237563591.jpg?v=1740212381331"
-      link="href: DNA.html;"
-      event-set__click="_event: click; _target: #click-sound; play: true;"
-      animation__mouseenter="property: position; to: -2 -0.8 -4.7; dur: 500; easing: easeOutQuint;"
-      animation__mouseleave="property: position; to: -2 -1 -5; dur: 500; easing: easeOutQuint;"></a-image>
+		<a-image position="2 1.75 -5" depth="0.001" height="1.5" width="2"
+			src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237563591.jpg?v=1740212381331"
+			link="href: DNA.html;" custom-cursor
+			animation__mouseenter="property: position; to: 2 1.75 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: 2 1.75 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
-    <!-- Add glowing effect for buttons -->
-    <a-light type="point" intensity="0.5" position="-2 -1 -4"></a-light>
+		<a-image position="2 0.25 -5" depth="0.001" height="1.5" width="2"
+			src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237230738.jpg?v=1740212417044"
+			link="href: virus.html;" custom-cursor
+			animation__mouseenter="property: position; to: 2 0.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: 2 0.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
-    <!-- Add a floating navigation panel -->
-    <a-plane position="0 0 -3" width="4" height="2" color="#333333" opacity="0.8">
-      <a-text value="[Navigation]" position="-0.8 0.6 0.01" color="#FFFFFF"></a-text>
-      <a-text value="- Home -" position="-0.8 0.3 0.01" color="#FFD700"></a-text>
-      <a-text value="- Explore -" position="-0.8 0 0.01" color="#FFD700"></a-text>
-    </a-plane>
+		<a-image position="2 -1.25 -5" depth="0.001" height="1.5" width="2"
+			src="https://cdn.glitch.global/9f6c09c9-a8b7-4cfe-a713-fe3b1db6c4c6/messageImage_1740237167478.jpg?v=1740212629685"
+			link="href: body.html;" custom-cursor
+			animation__mouseenter="property: position; to: 2 -1.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: 2 -1.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
-    <!-- Add a camera and cursor for interaction -->
-    <a-entity camera look-controls position="0 1.6 4">
-      <a-cursor color="#FF0000"></a-cursor>
-    </a-entity>
-  </a-scene>
+		<a-image position="-2 -1.25 -5" width="2" height="1.5"
+			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/messageImage_1737634842227.jpg?v=1737635032383"
+			link="href: intercellular.html" custom-cursor
+			animation__mouseenter="property: position; to: -2 -1.25 -4.7; startEvents: mouseenter; dur: 500; easing: easeOutQuint;"
+			animation__mouseleave="property: position; to: -2 -1.25 -5; startEvents: mouseleave; dur: 500; easing: easeOutQuint;"></a-image>
 
+		<a-image position="-1 1 -5" depth="0.001" height="3" width="4"
+			src="https://cdn.glitch.global/1946d3b7-6bad-445e-8a24-a4fa42d8868b/pixelcut-export.png?v=1731929453580"></a-image>
+
+		<a-entity camera look-controls position="0 0 500"
+			animation="property: position; to: 0 0 0; dur: 3000; easing: easeOutQuint;">
+			<a-entity cursor="fuse: true; fuseTimeout: 2000"
+					  position="0 0 -1"
+					  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+					  material="color: white; shader: flat">
+				<a-entity id="cursorLoader"
+						  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03; thetaLength: 0"
+						  material="color: #4CAF50; shader: flat"
+						  animation__fusing="property: geometry.thetaLength; startEvents: startLoading; pauseEvents: stopLoading; from: 0; to: 360; dur: 2000; easing: linear"
+						  animation__mouseleave="property: geometry.thetaLength; startEvents: stopLoading; to: 0; dur: 1; easing: linear"></a-entity>
+			</a-entity>
+		</a-entity>
+	</a-scene>
+
+	<script>
+		const video = document.querySelector("#background-video");
+		video.play();
+	</script>
 </body>
 
 </html>
